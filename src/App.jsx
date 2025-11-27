@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import YouTubePlayer from './components/YouTubePlayer.jsx';
 import EventLog from './components/EventLog.jsx';
 
@@ -21,13 +21,9 @@ export default function App({ videoId: initialVideoId = DEFAULT_VIDEO_ID, player
     ]);
   }, []);
 
-  const statusCopy = useMemo(
-    () =>
-      isLoggedIn
-        ? 'Viewer is authenticated. The livestream iframe is available.'
-        : 'Viewer is a guest. We block the player until they log in.',
-    [isLoggedIn],
-  );
+  const statusCopy = isLoggedIn
+    ? 'Viewer is authenticated. The livestream iframe is available.'
+    : 'Viewer is a guest. We block the player until they log in.';
 
   const toggleLogin = () => setIsLoggedIn((prev) => !prev);
 
@@ -35,7 +31,6 @@ export default function App({ videoId: initialVideoId = DEFAULT_VIDEO_ID, player
     <div className="layout">
       <div className="card header">
         <div>
-          <p className="pill dot">Live classroom</p>
           <h1 className="title">Secure Livestream Viewer</h1>
           <div style={{ color: 'var(--muted)', marginTop: 6 }}>{statusCopy}</div>
         </div>
@@ -49,7 +44,7 @@ export default function App({ videoId: initialVideoId = DEFAULT_VIDEO_ID, player
             onClick={toggleLogin}
             data-testid="login-toggle"
           >
-            {isLoggedIn ? 'Log out' : 'Log in to continue'}
+            {isLoggedIn ? 'Log out' : 'Log in'}
           </button>
         </div>
       </div>
@@ -86,7 +81,6 @@ export default function App({ videoId: initialVideoId = DEFAULT_VIDEO_ID, player
               <h2 className="title" style={{ fontSize: 18, margin: 0 }}>
                 Livestream player
               </h2>
-              <span className="pill secondary">Access controlled</span>
             </div>
 
             <div className="player-area">

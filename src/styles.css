@@ -89,6 +89,7 @@ body {
 
 .button {
   cursor: pointer;
+  min-width: 100px;
   padding: 10px 14px;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -246,6 +247,8 @@ body {
 
 .helper-buttons {
   display: flex;
+  flex-direction: row;
+  align-items: baseline;
   gap: 10px;
   flex-wrap: wrap;
 }

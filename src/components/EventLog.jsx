@@ -15,7 +15,6 @@ export const formatDuration = (seconds, options = {}) => {
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const secs = totalSeconds % 60;
 
-  // Компактный формат: часы:минуты:секунды (если дни не нужны)
   if (compact && !showDays) {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
@@ -36,7 +35,6 @@ export const formatDetail = (event) => {
     const fromDays = Math.floor(fromSeconds / 86400);
     const toDays = Math.floor(toSeconds / 86400);
     
-    // Если дни одинаковые, показываем только время в формате ЧЧ:ММ:СС
     const sameDay = fromDays === toDays && fromDays > 0;
     
     const fromStr = sameDay 
@@ -60,9 +58,6 @@ export default function EventLog({ events }) {
   if (!events.length) {
     return (
       <div className="banner" data-testid="empty-log">
-        <span className="banner-icon" aria-hidden="true">
-          *
-        </span>
         <div>
           <strong>Watching for interactions</strong>
           <div style={{ color: 'var(--muted)' }}>Play, pause, and seek actions will appear here.</div>
